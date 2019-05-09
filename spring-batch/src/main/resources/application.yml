@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: springboot-batch
+  datasource:
+    url: jdbc:mysql://localhost:3306/example
+    username: root
+    password: 872287583
+  batch:
+    job:
+      enabled: false
