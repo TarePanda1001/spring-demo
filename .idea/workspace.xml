@@ -202,7 +202,7 @@
     </configuration>
     <configuration name="BatchDemoApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="spring-batch" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="com.wyl.batchdemo.BatchDemoApplication" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.wyl.batchdemo.SpringBatchApplication" />
     </configuration>
     <configuration name="SpringBatchApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="spring-batch" />
