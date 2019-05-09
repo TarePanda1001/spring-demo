@@ -1,0 +1,64 @@
+spring:
+  local:
+    datasource:
+      hikari:
+        jdbc-url: jdbc:mysql://127.0.0.1:3306/example?useUnicode=true&characterEncoding=UTF-8
+        username: root
+        password: 872287583
+        driver-class-name: com.mysql.jdbc.Driver
+  prod:
+    datasource:
+      hikari:
+        jdbc-url: jdbc:mysql://172.21.139.13:3307/yunying?useUnicode=true&characterEncoding=UTF-8
+        username: chaikuprod
+        password: testchaiku
+        driver-class-name: com.mysql.jdbc.Driver
+  service:
+    datasource:
+      hikari:
+        jdbc-url: jdbc:mysql://172.21.139.13:3306/yunying?useUnicode=true&characterEncoding=UTF-8
+        username: chaikuservice
+        password: testchaiku
+        driver-class-name: com.mysql.jdbc.Driver
+  tianxiao:
+    datasource:
+      hikari:
+        jdbc-url: jdbc:mysql://172.21.139.13:3312/tx?useUnicode=true&characterEncoding=UTF-8
+        username: chaikutianxiao
+        password: testchaiku
+        driver-class-name: com.mysql.jdbc.Driver
+  hermes:
+    datasource:
+      hikari:
+        jdbc-url: jdbc:mysql://172.21.139.13:3308/tts?useUnicode=true&characterEncoding=UTF-8
+        username: chaikuhermes
+        password: testchaiku
+        driver-class-name: com.mysql.jdbc.Driver
+  redis:
+    database: 0
+    host: localhost
+    password:
+    port: 6379
+  cache:
+    type: redis
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: admin
+    password: admin
+    listener:
+      simple:
+        acknowledge-mode: manual
+  application:
+    name: webdemo-plus
+  devtools:
+    restart:
+      enabled: true
+      additional-paths: src/main/java
+      exclude: templates/**
+
+mybatis-plus:
+  mapper-locations: classpath:com/wyl/webdemo/xml/*/*.xml
+  type-aliases-package: com.wyl.webdemo.mapper
+
+
