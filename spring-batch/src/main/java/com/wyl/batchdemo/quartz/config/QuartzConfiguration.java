@@ -13,6 +13,7 @@ import org.springframework.scheduling.quartz.CronTriggerFactoryBean;
 import org.springframework.scheduling.quartz.JobDetailFactoryBean;
 import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -62,7 +63,7 @@ public class QuartzConfiguration {
         cTrigger.setStartDelay(5000);
         cTrigger.setName("my_trigger");
         cTrigger.setGroup("trigger_group");
-        cTrigger.setCronExpression("0/10 * * * * ? "); //每间隔5s触发一次Job任务
+        cTrigger.setCronExpression("0/5 * * * * ? "); //每间隔5s触发一次Job任务
         return cTrigger;
     }
 

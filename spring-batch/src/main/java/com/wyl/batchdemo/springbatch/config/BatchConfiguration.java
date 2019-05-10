@@ -3,9 +3,10 @@ package com.wyl.batchdemo.springbatch.config;
 import com.wyl.batchdemo.springbatch.listener.JobListener;
 import com.wyl.batchdemo.springbatch.model.Access;
 import com.wyl.batchdemo.springbatch.processor.MyProcessor;
-import com.wyl.batchdemo.springbatch.reader.MyReader;
 import com.wyl.batchdemo.springbatch.writer.MyWriter;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.mybatis.spring.batch.MyBatisPagingItemReader;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
@@ -17,13 +18,11 @@ import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.item.database.JpaPagingItemReader;
 import org.springframework.batch.item.database.orm.JpaNativeQueryProvider;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import javax.annotation.Resource;
 import javax.persistence.EntityManagerFactory;
-
 /**
  * @author weiyilin
  * @date 2019/5/9 上午11:55
@@ -45,14 +44,17 @@ public class BatchConfiguration {
     @Resource
     private JobListener jobListener;            //简单的JOB listener
 
+    @Resource
+    private SqlSessionFactory sqlSessionFactory;
+
     /**
      * 一个简单基础的Job通常由一个或者多个Step组成
      */
     @Bean
     public Job dataHandleJob() {
-        return jobBuilderFactory.get("myJob").
-                incrementer(new RunIdIncrementer()).
-                start(handleDataStep()).    //start是JOB执行的第一个step
+        return jobBuilderFactory.get("myJob")
+                .incrementer(new RunIdIncrementer())
+                .start(handleDataStep()).    //start是JOB执行的第一个step
 //                next(xxxStep()).
 //                next(xxxStep()).
 //                ...
@@ -77,7 +79,8 @@ public class BatchConfiguration {
                 .retry(Exception.class).skipLimit(100)
                 .skip(Exception.class)
                 //指定ItemReader
-                .reader(new MyReader(emf))
+//                .reader(new JpaReader(emf))
+                .reader(mybaticReader())
                 //指定ItemProcessor
                 .processor(new MyProcessor())
                 //指定ItemWriter
@@ -131,6 +134,15 @@ public class BatchConfiguration {
                 log.info("write data : " + access); //模拟 假装写数据 ,这里写真正写入数据的逻辑
             }
         };
+    }
+
+    @Bean
+    public MyBatisPagingItemReader<Access> mybaticReader() {
+        MyBatisPagingItemReader<Access> myBatisPagingItemReader = new MyBatisPagingItemReader<>();
+        myBatisPagingItemReader.setSqlSessionFactory(sqlSessionFactory);
+        myBatisPagingItemReader.setQueryId("com.wyl.batchdemo.springbatch.mapper.AccessMapper.listAccess");
+        myBatisPagingItemReader.setPageSize(500);
+        return myBatisPagingItemReader;
     }
 
 }

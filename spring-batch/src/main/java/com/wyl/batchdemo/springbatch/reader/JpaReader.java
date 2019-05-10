@@ -4,28 +4,24 @@ import com.wyl.batchdemo.springbatch.model.Access;
 import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.database.JpaPagingItemReader;
 import org.springframework.batch.item.database.orm.JpaNativeQueryProvider;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.PersistenceContext;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author weiyilin
  * @date 2019/5/9 上午11:54
  */
-public class MyReader extends JpaPagingItemReader<Access> {
+public class JpaReader extends JpaPagingItemReader<Access> {
 
     private EntityManagerFactory emf;           //注入实例化Factory 访问数据
 
-    public MyReader() {
+    public JpaReader() {
     }
 
-    public MyReader(EntityManagerFactory emf) {
+    public JpaReader(EntityManagerFactory emf) {
         this.emf = emf;
         getDataReader();
     }

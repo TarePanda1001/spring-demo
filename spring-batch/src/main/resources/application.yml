@@ -8,3 +8,6 @@ spring:
   batch:
     job:
       enabled: false
+
+mybatis:
+  mapper-locations: classpath:mapper/*Mapper.xml
