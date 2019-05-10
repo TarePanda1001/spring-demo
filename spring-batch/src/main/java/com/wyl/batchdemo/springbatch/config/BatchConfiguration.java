@@ -3,6 +3,7 @@ package com.wyl.batchdemo.springbatch.config;
 import com.wyl.batchdemo.springbatch.listener.JobListener;
 import com.wyl.batchdemo.springbatch.model.Access;
 import com.wyl.batchdemo.springbatch.processor.MyProcessor;
+import com.wyl.batchdemo.springbatch.reader.MybatisReader;
 import com.wyl.batchdemo.springbatch.writer.MyWriter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -83,7 +84,7 @@ public class BatchConfiguration {
                 .skip(Exception.class)
                 //指定ItemReader
 //                .reader(new JpaReader(emf))
-                .reader(mybaticReader())
+                .reader(new MybatisReader(sqlSessionFactory))
                 //指定ItemProcessor
                 .processor(new MyProcessor())
                 //指定ItemWriter
@@ -139,17 +140,17 @@ public class BatchConfiguration {
         };
     }
 
-    @Bean
-    public MyBatisPagingItemReader<Access> mybaticReader() {
-        MyBatisPagingItemReader<Access> myBatisPagingItemReader = new MyBatisPagingItemReader<>();
-        myBatisPagingItemReader.setSqlSessionFactory(sqlSessionFactory);
-        myBatisPagingItemReader.setQueryId("com.wyl.batchdemo.springbatch.mapper.AccessMapper.listAccess");
-        myBatisPagingItemReader.setPageSize(500);
-        Map<String, Object> map = new HashMap<>();
-        map.put("start", 100);
-        map.put("end", 400);
-        myBatisPagingItemReader.setParameterValues(map);
-        return myBatisPagingItemReader;
-    }
+//    @Bean
+//    public MyBatisPagingItemReader<Access> mybaticReader() {
+//        MyBatisPagingItemReader<Access> myBatisPagingItemReader = new MyBatisPagingItemReader<>();
+//        myBatisPagingItemReader.setSqlSessionFactory(sqlSessionFactory);
+//        myBatisPagingItemReader.setQueryId("com.wyl.batchdemo.springbatch.mapper.AccessMapper.listAccess");
+//        myBatisPagingItemReader.setPageSize(500);
+//        Map<String, Object> map = new HashMap<>();
+//        map.put("start", 100);
+//        map.put("end", 400);
+//        myBatisPagingItemReader.setParameterValues(map);
+//        return myBatisPagingItemReader;
+//    }
 
 }
