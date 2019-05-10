@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author weiyilin
@@ -13,6 +14,6 @@ import java.util.List;
 @Component
 public interface AccessMapper {
 
-    List<Access> listAccess();
+    List<Access> listAccess(Map map);
 
 }

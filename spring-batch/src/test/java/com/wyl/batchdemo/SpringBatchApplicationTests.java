@@ -14,17 +14,8 @@ import java.util.List;
 @SpringBootTest
 public class SpringBatchApplicationTests {
 
-    @Resource
-    private AccessMapper accessMapper;
-
     @Test
     public void contextLoads() {
-    }
-
-    @Test
-    public void test() {
-        List<Access> list = accessMapper.listAccess();
-        System.out.print(list);
     }
 
 }

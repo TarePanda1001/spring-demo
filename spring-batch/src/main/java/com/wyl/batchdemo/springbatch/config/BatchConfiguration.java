@@ -23,6 +23,9 @@ import org.springframework.context.annotation.Configuration;
 
 import javax.annotation.Resource;
 import javax.persistence.EntityManagerFactory;
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @author weiyilin
  * @date 2019/5/9 上午11:55
@@ -142,6 +145,10 @@ public class BatchConfiguration {
         myBatisPagingItemReader.setSqlSessionFactory(sqlSessionFactory);
         myBatisPagingItemReader.setQueryId("com.wyl.batchdemo.springbatch.mapper.AccessMapper.listAccess");
         myBatisPagingItemReader.setPageSize(500);
+        Map<String, Object> map = new HashMap<>();
+        map.put("start", 100);
+        map.put("end", 400);
+        myBatisPagingItemReader.setParameterValues(map);
         return myBatisPagingItemReader;
     }
 

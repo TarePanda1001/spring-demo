@@ -18,8 +18,12 @@
     </resultMap>
 
     <select id="listAccess"
+            parameterType="java.util.Map"
             resultType="com.wyl.batchdemo.springbatch.model.Access">
         SELECT * FROM access
+        <where>
+            id >= #{start} and id &lt;= #{end}
+        </where>
     </select>
 
 </mapper>
