@@ -2,7 +2,9 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/canal-databus" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/spring-batch" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/webdemo" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../tianxiao/tianxiao-module/tianxiao-module-data" charset="UTF-8" />
   </component>
 </project>
